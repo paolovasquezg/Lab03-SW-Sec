@@ -1,5 +1,6 @@
 from sqlmodel import SQLModel, Field, create_engine, Session, select
 from typing import Optional
+import os
 
 class Users(SQLModel, table=True):
     id: Optional[int] = Field(default=None, primary_key=True)
@@ -7,7 +8,7 @@ class Users(SQLModel, table=True):
     name: str
     age: int
 
-DATABASE_URL = "postgresql://postgres:1234@localhost:5432/postgres"
+DATABASE_URL = os.getenv("DATABASE_URL", "postgresql://postgres:1234@localhost:5432/postgres")
 
 engine = create_engine(DATABASE_URL, echo=True)
 
