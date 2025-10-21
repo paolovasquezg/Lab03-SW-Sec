@@ -1,0 +1,72 @@
+2025-10-21T11:45:00-0500 WARNING suspicious ip=127.0.0.1 endpoint=/user user_agent="curl/8.7.1" params={'username': "' OR 1=1--"} matches={'username': "'"} count=1
+2025-10-21T11:45:00-0500 WARNING validation_sqli ip=127.0.0.1 endpoint=/user username="' OR 1=1--"
+2025-10-21T11:45:00-0500 INFO request ip=127.0.0.1 endpoint=/user status=200 user_agent="curl/8.7.1" params={'username': "' OR 1=1--"} suspicious=True
+2025-10-21T11:45:00-0500 WARNING suspicious ip=127.0.0.1 endpoint=/user user_agent="curl/8.7.1" params={'username': '/*test*/'} matches={'username': '/*'} count=2
+2025-10-21T11:45:00-0500 WARNING validation_sqli ip=127.0.0.1 endpoint=/user username="/*test*/"
+2025-10-21T11:45:00-0500 INFO request ip=127.0.0.1 endpoint=/user status=200 user_agent="curl/8.7.1" params={'username': '/*test*/'} suspicious=True
+2025-10-21T11:45:00-0500 WARNING validation_sqli ip=127.0.0.1 endpoint=/user username="UNION SELECT 1,2,3,4"
+2025-10-21T11:45:00-0500 INFO request ip=127.0.0.1 endpoint=/user status=200 user_agent="curl/8.7.1" params={'username': 'UNION SELECT 1,2,3,4'} suspicious=False
+2025-10-21T11:45:00-0500 INFO sql_ok endpoint=/user username=alice rows=1
+2025-10-21T11:45:00-0500 INFO request ip=127.0.0.1 endpoint=/user status=200 user_agent="curl/8.7.1" params={'username': 'alice'} suspicious=False
+2025-10-21T11:45:00-0500 INFO sql_ok endpoint=/user username=alice rows=1
+2025-10-21T11:45:00-0500 INFO request ip=127.0.0.1 endpoint=/user status=200 user_agent="curl/8.7.1" params={'username': 'alice'} suspicious=False
+2025-10-21T11:46:36-0500 WARNING suspicious ip=127.0.0.1 endpoint=/user user_agent="curl/8.7.1" params={'username': "' OR 1=1--"} matches={'username': "'"} count=1
+2025-10-21T11:46:36-0500 WARNING validation_sqli ip=127.0.0.1 endpoint=/user username="' OR 1=1--"
+2025-10-21T11:46:36-0500 INFO request ip=127.0.0.1 endpoint=/user status=200 user_agent="curl/8.7.1" params={'username': "' OR 1=1--"} suspicious=True
+2025-10-21T11:46:36-0500 WARNING suspicious ip=127.0.0.1 endpoint=/user user_agent="curl/8.7.1" params={'username': '/*test*/'} matches={'username': '/*'} count=2
+2025-10-21T11:46:36-0500 WARNING validation_sqli ip=127.0.0.1 endpoint=/user username="/*test*/"
+2025-10-21T11:46:36-0500 INFO request ip=127.0.0.1 endpoint=/user status=200 user_agent="curl/8.7.1" params={'username': '/*test*/'} suspicious=True
+2025-10-21T11:46:36-0500 WARNING validation_sqli ip=127.0.0.1 endpoint=/user username="UNION SELECT 1,2,3,4"
+2025-10-21T11:46:36-0500 INFO request ip=127.0.0.1 endpoint=/user status=200 user_agent="curl/8.7.1" params={'username': 'UNION SELECT 1,2,3,4'} suspicious=False
+2025-10-21T11:46:36-0500 INFO sql_ok endpoint=/user username=alice rows=1
+2025-10-21T11:46:36-0500 INFO request ip=127.0.0.1 endpoint=/user status=200 user_agent="curl/8.7.1" params={'username': 'alice'} suspicious=False
+2025-10-21T11:47:24-0500 INFO request ip=127.0.0.1 endpoint=/docs status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={} suspicious=False
+2025-10-21T11:47:24-0500 INFO request ip=127.0.0.1 endpoint=/openapi.json status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={} suspicious=False
+2025-10-21T11:47:29-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:29-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:31-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:31-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:31-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:31-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:32-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:32-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:32-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:32-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:32-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:32-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:32-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:32-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:32-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:32-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:32-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:32-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:33-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:33-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:33-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:33-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:33-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:33-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:33-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:33-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:33-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:33-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:57-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:57-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:57-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:57-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:58-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:58-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:58-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:58-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:47:59-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:47:59-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:48:00-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:48:00-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:48:00-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:48:00-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:48:00-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:48:00-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:48:00-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:48:00-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
+2025-10-21T11:48:00-0500 WARNING validation_failed endpoint=/ping reason=invalid_ip host=ls
+2025-10-21T11:48:00-0500 INFO request ip=127.0.0.1 endpoint=/ping status=200 user_agent="Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/141.0.0.0 Safari/537.36" params={'host': 'ls'} suspicious=False
