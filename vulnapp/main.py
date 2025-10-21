@@ -23,13 +23,18 @@ app.add_middleware(
 @app.get("/")
 
 def testing():
-    return "Testing Vulnapp"
+    return "Testing VulnApp"
 
 @app.get("/ping")
 def ping(host: str):
     command = f"ping -c 1 {host}"
-    output = subprocess.getoutput(command)
-    return {"command": command, "output": output}
+    
+    try:
+        output = subprocess.getoutput(command)
+        return {"command": command, "output": output}
+    
+    except Exception as e:
+        return {"command": command, "error": str(e)}
 
 
 @app.get("/user")
@@ -38,9 +43,16 @@ def user(username: str):
     query = f"SELECT * FROM users WHERE username = '{username}'"
 
     conn = engine.raw_connection()
-    cur = conn.cursor()
-    cur.execute(query)
-
-    cols = [desc[0] for desc in cur.description]
-    rows = [dict(zip(cols, r)) for r in cur.fetchall()]
-    return {"query": query, "rows": rows}
+    
+    try:
+        cur = conn.cursor()
+        cur.execute(query)
+        cols = [desc[0] for desc in cur.description]
+        rows = [dict(zip(cols, r)) for r in cur.fetchall()]
+        return {"query": query, "rows": rows}
+    
+    except Exception as e:
+        
+        return {"query": query, "error": str(e)}
+    finally:
+        conn.close()
