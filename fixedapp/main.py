@@ -65,9 +65,4 @@ def user(username: str):
         return {"query": query, "error": str(e)}
     
     finally:
-        try:
-            if cur is not None:
-                cur.close()
-        except Exception:
-            pass
         conn.close()
