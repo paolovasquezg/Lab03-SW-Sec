@@ -414,9 +414,6 @@ You can check the logs of the Docker execution with:
 docker logs -f fixedapp-container
 ```
 
-Revise `fixedapp/main.py` and `fixedapp/logger.py` for more detail.
-
-
 ## Question 07
 
 ## References
