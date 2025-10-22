@@ -406,6 +406,17 @@ Following the explanations above, logs can be seen like this:
 See `fixedapp/main.py` and `fixedapp/logger.py` for more detail.
 
 
+### View logs in Docker
+
+You can check the logs of the Docker execution with:
+
+```bash
+docker logs -f fixedapp-container
+```
+
+Revise `fixedapp/main.py` and `fixedapp/logger.py` for more detail.
+
+
 ## Question 07
 
 ## References
