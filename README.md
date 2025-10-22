@@ -416,6 +416,105 @@ docker logs -f fixedapp-container
 
 ## Question 07
 
+We will see the importance of applying the following techniques to avoid attacks and vulnerabilities:
+
+### SQL
+
+Directly concatenating queries like:
+
+```python
+query = f"SELECT * FROM users WHERE username = '{username}'"
+```
+
+can directly permit injection as it was shown before. Using parameterized queries like:
+
+```
+SELECT id, username, name, age FROM users WHERE username = %s
+```
+
+makes the database treat the parameters received only as values, so the attacker can’t change the query structure [1]. For example in the endpoint `/user`, using this directly compares `username` with the parameter sent. ORMs, like in the example below [2], apply this same principle:
+
+```python
+user_id = request.args.get('user_id')
+user = db.session.query(User).filter_by(id=user_id).first()
+```
+
+### b. Command
+
+By concatenating strings into commands, an attacker can inject any command they want into the system [3]. For example, in the vulnerable app:
+
+```python
+command = f"ping -c 1 {host}"
+```
+
+This allows injecting additional commands. To fix this, we use `subprocess.run([...])` [4], like:
+
+```python
+command = ["ping", "-c", "1", "-W", "2", host]
+res = subprocess.run(command, capture_output=True, text=True, timeout=5, check=False)
+```
+
+This makes the user input be treated completely as data, so there’s no interpretation of characters like `;` or other shell operators. This complements the idea of not permitting `shell=True` [5], which allows Python to run commands through a shell and parse operators like `&&` or `;`, making injection possible.
+
+### c. Validation and whitelisting
+
+Validating helps avoid attacks and injections by only accepting what’s supposed to be accepted. Within this, there’s blacklisting (blocks known bad inputs/patterns) and whitelisting (only allows known safe inputs). In our implementation we apply blacklisting with these patterns:
+
+```python
+sql_injection_detect = re.compile(
+	r"(?i)"
+	r"("
+	r"(?:['\";]|--|/\*|\*/|&&|\|)|"
+	r"\bunion\s+select\b|"
+	r"\bor\s*'?1'?\s*=\s*'?1'?\b|"
+	r"\band\s*'?1'?\s*=\s*'?1'?\b|"
+	r"(?:\b(select|insert|update|delete|drop|alter|create)\b.*\b(from|into|table)\b)"
+	r")"
+)
+
+ip_injection_detect = re.compile(r"(?:['\";]|--|/\*|\*/|&&|\|)")
+```
+
+Why is whitelisting better than blacklisting? In this case we choose to do blacklisting, but actually whitelisting is safer because attackers can often find new ways to bypass blacklists, while with whitelisting this is much harder [6].
+
+### d. Least privilege
+
+Giving the least privilege to the accounts used by the application and database is very important. Why? For example, if an attacker is able to inject SQL but the DB user only has read access, they won’t be able to modify or delete information, reducing the impact. In our case, for example in the vulnerable application:
+
+```python
+query = f"SELECT * FROM users WHERE username = '{username}'"
+```
+
+is akin to giving the user only read access and nothing else, so the injection is not as dangerous as it could be [7].
+
+### e. Rotation and cipher
+
+Managing backups and rotating credentials is very beneficial. For credentials, suppose a user is able to do injection on a database with write/delete access. When this suspicious access is detected, the state of the database can be recovered via the backups (assuming these backups are done on a daily basis). For rotating credentials, suppose an attacker gains access, for example to the database as in our case:
+
+```
+postgresql://postgres:1234@localhost:5432/postgres
+```
+
+Where the password is `1234`. If we are constantly rotating passwords and credentials, we could, for example, change the password to `5678` and the attacker loses access.
+
+And for all this to be safer, we should protect these backups and credentials—preferably encrypted [8].
+
+### f. Additional mitigations
+
+Using a Web Application Firewall (WAF) can be highly effective for filtering and controlling incoming traffic by allowing only trusted IP addresses to connect [9]. In addition, rate limiting and CAPTCHA mechanisms are valuable for preventing abuse of endpoints that are susceptible to spamming or brute-force attacks. In particular, Google reCAPTCHA v3 helps identify non-human interactions and block automated requests, ensuring that only legitimate users can access critical endpoints [10]. Finally, Multi-Factor Authentication (MFA) plays a crucial role in protecting sensitive operations such as login processes, by adding an additional layer of verification that significantly reduces the risk of unauthorized access [11].
+
 ## References
+
+1. Parker, J. (2011, January 17). What is parameterized query?. Stack Overflow. https://stackoverflow.com/questions/4712037/what-is-parameterized-query
+2. Zakrzewski, S. (2025, April 28). SQL Injection in the Age of ORM: Risks, Mitigations, and Best Practices. AFINE. https://afine.com/sql-injection-in-the-age-of-orm-risks-mitigations-and-best-practices/
+3. OWASP Foundation. (n.d.). Command Injection. OWASP. https://owasp.org/www-community/attacks/Command_Injection
+4. Python Software Foundation. (n.d.). subprocess — Subprocess management. Python Documentation. https://docs.python.org/3/library/subprocess.html
+5. Python Software Foundation. (n.d.). subprocess — Frequently used arguments (warning: shell=True security hazard). Python Documentation. https://docs.python.org/3/library/subprocess.html#frequently-used-arguments
+6. OWASP Foundation. (n.d.). Input Validation. OWASP. https://owasp.org/www-community/Input_Validation
+7. Palo Alto Networks. (n.d.). What is the principle of least privilege? Palo Alto Networks Cyberpedia. https://www.paloaltonetworks.com/cyberpedia/what-is-the-principle-of-least-privilege
+8. CIS Controls. (n.d.). Control 11 — Data Recovery. Center for Internet Security. https://www.cisecurity.org/controls/data-recovery/
+9. Cloudflare. (n.d.). What is a Web Application Firewall (WAF)? https://www.cloudflare.com/learning/ddos/what-is-a-web-application-firewall-waf/
+10. Google. (n.d.). reCAPTCHA v3. https://developers.google.com/recaptcha/docs/v3
+11. Microsoft. (n.d.). What is multi-factor authentication? Microsoft Learn. https://learn.microsoft.com/en-us/entra/identity/authentication/concept-mfa-howitworks
 
 
