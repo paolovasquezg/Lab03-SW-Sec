@@ -12,8 +12,16 @@ sus_threshold = 3
 sus_window = 20
 block_duration = 30
 
-sql_injection_detect = re.compile(r"(?i)" r"(--|;|/\*|\*/|" r"\bunion\s+select\b|" r"\bor\s*1\s*=\s*1\b|" 
-r"\band\s*1\s*=\s*1\b|" r"(?:\b(select|insert|update|delete|drop|alter|create)\b.*\b(from|into|table)\b))")
+sql_injection_detect = re.compile(
+    r"(?i)"
+    r"("
+    r"(?:['\";]|--|/\*|\*/|&&|\|)|"
+    r"\bunion\s+select\b|"
+    r"\bor\s*'?1'?\s*=\s*'?1'?\b|"
+    r"\band\s*'?1'?\s*=\s*'?1'?\b|"
+    r"(?:\b(select|insert|update|delete|drop|alter|create)\b.*\b(from|into|table)\b)"
+    r")"
+)
 
 ip_injection_detect = re.compile(r"(?:['\";]|--|/\*|\*/|&&|\|)")
 

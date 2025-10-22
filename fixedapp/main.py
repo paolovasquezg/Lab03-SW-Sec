@@ -35,7 +35,6 @@ def ping(host: str):
     if ip_injection_detect.search((host or "").lower()):
         logger.warning(f"validation_cmdinj endpoint=/ping host=\"{host}\"")
         return {"error": "invalid host"}
-
     try:
         ip = ip_address(host)
         if not isinstance(ip, IPv4Address):
@@ -62,7 +61,7 @@ def user(request: Request, username: str):
     query = "SELECT id, username, name, age FROM users WHERE username = %s"
 
     if sql_injection_detect.search((username or "").lower()):
-        ip = request.client.host if request.client else "unknown"
+        ip = request.client.host
         logger.warning(f"validation_sql ip={ip} endpoint=/user username=\"{username}\"")
         return {"error": "invalid query"}
 
