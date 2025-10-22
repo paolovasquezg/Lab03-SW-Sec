@@ -419,7 +419,7 @@ docker logs -f fixedapp-container
 
 We will see the importance of applying the following techniques to avoid attacks and vulnerabilities:
 
-### SQL
+### a. SQL
 
 Directly concatenating queries like:
 
