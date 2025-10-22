@@ -1,6 +1,7 @@
 # Laboratory 03: Software Security
 
-We will revise software security in this lab by running a vulnerable app and its fixed/secure counterpart. Before starting, run:
+We will revise software security in this lab by running a vulnerable app and its fixed/secure counterpart.
+Before starting, ensure PostgreSQL is installed and running. Then run
 
 ```bash
 make
