@@ -90,8 +90,7 @@ class Logger(BaseHTTPMiddleware):
         try:
             response = await call_next(request)
             logger.info(
-                f"request ip={ip} endpoint={endpoint} status={response.status_code} user_agent=\"{ua}\" params={params} suspicious={suspicious}"
-            )
+                f"request ip={ip} endpoint={endpoint} status={response.status_code} user_agent=\"{ua}\" params={params} suspicious={suspicious}")
             return response
         except Exception:
             logger.exception(f"unhandled_error ip={ip} endpoint={endpoint} user_agent=\"{ua}\" params={params}")
